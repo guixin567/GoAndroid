@@ -1,3 +1,4 @@
 rootProject.name='GoAndroid'
 include ':app'
 include ':list'
+include ':base'

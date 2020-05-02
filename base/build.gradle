@@ -1,8 +1,4 @@
-if (is_application.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -11,10 +7,6 @@ android {
     buildToolsVersion build_tools_version
 
     defaultConfig {
-        if (is_application.toBoolean()) {
-            applicationId "com.zhengyinuo.list"
-        }
-
         minSdkVersion min_sdk_version.toInteger()
         targetSdkVersion target_sdk_version.toInteger()
         versionCode version_code.toInteger()
@@ -31,29 +23,14 @@ android {
         }
     }
 
-    sourceSets {
-        main{
-            if (is_application.toBoolean()) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
-            }
-        }
-
-    }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:${app_compat}"
-    implementation "androidx.core:core-ktx:${core_ktx}"
     implementation "androidx.appcompat:appcompat:$app_compat"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "androidx.core:core-ktx:$core_ktx"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    implementation project(path: ':base')
 }
