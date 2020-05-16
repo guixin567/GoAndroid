@@ -3,17 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion compile_sdk_version.toInteger()
-    buildToolsVersion build_tools_version
+    compileSdkVersion app_android.compileSdkVersion
+    buildToolsVersion app_android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion min_sdk_version.toInteger()
-        targetSdkVersion target_sdk_version.toInteger()
-        versionCode version_code.toInteger()
-        versionName version_name
+        minSdkVersion app_android.minSdkVersion
+        targetSdkVersion app_android.targetSdkVersion
+        versionCode app_android.versionCode
+        versionName app_android.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
+        testInstrumentationRunner app_android.testInstrumentationRunner
+        consumerProguardFiles app_android.consumerProguardFiles
     }
 
     buildTypes {
@@ -26,11 +26,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$app_compat"
-    implementation "androidx.core:core-ktx:$core_ktx"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    base_dependencies.each {
+        key, value -> implementation value
+    }
+    testImplementation app_dependencies.junit
+    androidTestImplementation app_dependencies.ext_junit
+    androidTestImplementation app_dependencies.espresso
 }

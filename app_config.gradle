@@ -1,0 +1,34 @@
+ext {
+    //是否设置每个module为独立的应用程序
+    is_application = true
+
+    //系统相关
+    app_android = [
+            compileSdkVersion        : 28,
+            buildToolsVersion        : "29.0.2",
+            minSdkVersion            : 26,
+            targetSdkVersion         : 28,
+            versionCode              : 1,
+            versionName              : "1.0",
+            testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner",
+            consumerProguardFiles    : 'consumer-rules.pro',
+    ]
+
+    //每个module都依赖的库
+    base_dependencies = [
+            libs              : fileTree(dir: 'libs', include: ['*.jar']),
+            kotlin_stdlib_jdk7: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61",
+            app_compat        : "androidx.appcompat:appcompat:1.1.0",
+            core_ktx          : "androidx.core:core-ktx:1.2.0",
+            constraintlayout: "androidx.constraintlayout:constraintlayout:1.1.3",
+    ]
+
+    //非每个module都依赖的库
+    app_dependencies = [
+            junit    : 'junit:junit:4.12',
+            ext_junit: 'androidx.test.ext:junit:1.1.1',
+            espresso : 'androidx.test.espresso:espresso-core:3.2.0',
+    ]
+
+
+}
